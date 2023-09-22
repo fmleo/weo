@@ -52,7 +52,7 @@ class Wysi(commands.Cog):
         self.bot = bot
         self.ctx_menu = app_commands.ContextMenu(
             name="where do you see it?",
-            callback=self.where_727,
+            callback=self.where_do_you_see_it,
         )
         self.bot.tree.add_command(self.ctx_menu)
 
@@ -60,7 +60,7 @@ class Wysi(commands.Cog):
         self.bot.tree.remove_command(self.ctx_menu.name, type=self.ctx_menu.type)
 
     @app_commands.guilds(559402502102056961, 680401335862296611)
-    async def where_727(
+    async def where_do_you_see_it(
         self, interaction: discord.Interaction, message: discord.Message
     ) -> None:
         if not message.attachments:
