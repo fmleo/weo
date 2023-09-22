@@ -3,15 +3,8 @@ from discord.ext import commands
 import discord
 
 from RestrictedPython import compile_restricted
-from RestrictedPython.Eval import default_guarded_getiter
-from RestrictedPython.Guards import safe_builtins, guarded_iter_unpack_sequence
-from RestrictedPython.PrintCollector import PrintCollector
 
-safe_builtins["_print_"] = PrintCollector
-safe_builtins["_getiter_"] = default_guarded_getiter
-safe_builtins["_iter_unpack_sequence_"] = guarded_iter_unpack_sequence
-
-restricted_globals = dict(__builtins__=safe_builtins, math=__import__("math"))
+from cogs.utils import restricted_globals
 
 
 def get_code_output(code: str) -> str:
@@ -20,9 +13,9 @@ def get_code_output(code: str) -> str:
         locals_dict = {}
         exec(bytecode, restricted_globals, locals_dict)
         # await ctx.reply(f"```py\n{code}```")
-        return f"`{locals_dict.get('result')}`"
+        return f"`{discord.utils.escape_markdown(locals_dict.get('result'))}`"
     except Exception as e:
-        return f"nuh uh: `{str(e)}`"
+        return f"nuh uh: `{discord.utils.escape_markdown(str(e))}`"
 
 
 class Eval(commands.Cog):
