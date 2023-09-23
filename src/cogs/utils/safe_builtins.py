@@ -5,10 +5,10 @@ from RestrictedPython.PrintCollector import PrintCollector
 safe_builtins["_print_"] = PrintCollector
 safe_builtins["_getiter_"] = default_guarded_getiter
 safe_builtins["_iter_unpack_sequence_"] = guarded_iter_unpack_sequence
-safe_builtins["help"] = lambda f: help(f)
+# safe_builtins["help"] = lambda f: print(help(f))
 safe_builtins.update(
     {
-        str(i): i
+        i.__name__: i
         for i in [
             dict,
             dir,
@@ -33,3 +33,12 @@ restricted_globals = dict(
     itertools=__import__("itertools"),
     functools=__import__("functools"),
 )
+
+
+if __name__ == "__main__":
+    from RestrictedPython import compile_restricted
+
+    code = compile_restricted("print(help(help)); result=printed")
+    locals_dict = {}
+    exec(code, restricted_globals, locals_dict)
+    print(locals_dict["result"])
