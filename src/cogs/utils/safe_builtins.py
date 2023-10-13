@@ -33,6 +33,7 @@ restricted_globals = dict(
     itertools=__import__("itertools"),
     functools=__import__("functools"),
     random=__import__("random"),
+    re=__import__("re"),
 )
 
 
