@@ -29,9 +29,10 @@ safe_builtins.update(
 
 restricted_globals = dict(
     __builtins__=safe_builtins,
-    math=__import__("math"),
-    itertools=__import__("itertools"),
+    collections=__import__("collections"),
     functools=__import__("functools"),
+    itertools=__import__("itertools"),
+    math=__import__("math"),
     random=__import__("random"),
     re=__import__("re"),
 )
