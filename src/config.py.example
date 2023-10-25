@@ -1,2 +1,2 @@
 token = "place your token here"
-cogs = ["sync", "wysi", "eval"]
+cogs = ["sync", "wysi", "eval", "currency"]
