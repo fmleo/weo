@@ -1,7 +1,5 @@
-import math
 from discord.ext import commands
 import aiohttp
-import discord
 
 
 class Currency(commands.Cog):
@@ -18,6 +16,8 @@ class Currency(commands.Cog):
         from_currency: str,
         to_currency: str,
     ):
+        to_currency = to_currency.lower()
+        from_currency = from_currency.lower()
         async with aiohttp.ClientSession(
             "https://cdn.jsdelivr.net",
         ) as session:
