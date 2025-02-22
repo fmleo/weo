@@ -22,14 +22,14 @@ class Currency(commands.Cog):
             "https://cdn.jsdelivr.net",
         ) as session:
             async with session.get(
-                f"/gh/fawazahmed0/currency-api@1/latest/currencies/{from_currency}/{to_currency}.json"
+                f"/npm/@fawazahmed0/currency-api@latest/v1/currencies/{from_currency}.min.json"
             ) as response:
-                ratio = (await response.json()).get(to_currency)
+                ratio = (await response.json()).get(from_currency, {}).get(to_currency)
 
                 if ratio:
                     converted = quantity * float(ratio)
 
-                    await ctx.reply(converted)
+                    await ctx.reply(f"{converted:.2f}")
                 else:
                     await ctx.reply("couldn't find cuwwency :3")
 
