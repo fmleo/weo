@@ -8,8 +8,9 @@ class RNG(commands.Cog):
     @commands.command(aliases=["roll"])
     async def roletar(self, ctx: commands.Context, n_groups: int = 2):
         """Distribui os membros de uma chamada de voz aleatoriamente em grupos."""
-        voice_channel = ctx.author.voice.channel
-        if voice_channel is None:
+        try:
+            voice_channel = ctx.author.voice.channel
+        except AttributeError:
             await ctx.reply("Você precisa estar em um canal de voz para usar este comando.")
             return
 
